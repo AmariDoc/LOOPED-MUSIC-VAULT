@@ -1,10 +1,13 @@
 {
-  "name": "Looped \u2013 Your Story. Your Sound.",
+  "name": "Looped — Your Story. Your Sound.",
   "short_name": "Looped",
+  "description": "Your story. Your sound. A music vault & reaction experience.",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#05050a",
+  "orientation": "portrait",
   "theme_color": "#05050a",
+  "background_color": "#05050a",
   "icons": [
     {
       "src": "icon-192.png",
