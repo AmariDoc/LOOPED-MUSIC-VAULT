@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Looped – Offline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background: #05050a;
+      color: #f5f5f5;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .box {
+      max-width: 460px;
+      border-radius: 1rem;
+      border: 1px solid #222238;
+      padding: 1.2rem 1.4rem;
+      background: #11111c;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+    p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+    .hint {
+      font-size: 0.8rem;
+      color: #9ea0b8;
+      margin-top: 0.6rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Looped – You are offline</h1>
+    <p>
+      You are currently offline. Any pages and data that were cached are still
+      available, but some actions may not work until you reconnect.
+    </p>
+    <p>
+      When your connection is back, refresh the page to return to the app.
+    </p>
+    <p class="hint">
+      (For testing: in DevTools go to Network → Offline, then refresh.)
+    </p>
+  </div>
+</body>
+</html>

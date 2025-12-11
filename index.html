@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Looped – Your Story. Your Sound.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#05050a" />
+
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- SINGLE GLOBAL BRAND BAR -->
+    <header class="app-titlebar">
+      <div class="titlebar-inner">
+        <h1 class="app-logo">LOOPED</h1>
+        <p class="app-tagline">Your story. Your sound.</p>
+      </div>
+    </header>
+
+    <!-- PAGE HEADER (title on left, pill on right) -->
+    <header class="app-header">
+      <div class="header-left">
+        <span id="header-title">Home</span>
+      </div>
+      <div class="header-right">
+        <button id="header-from-pill" class="pill-btn">From Amarii</button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- HOME PAGE -->
+      <section id="home" class="screen">
+        <button id="from-amarii-pill" class="top-pill">
+          From Amarii
+        </button>
+
+        <div class="tab-row">
+          <button class="tab-btn active" data-home-tab="for-you">For You</button>
+          <button class="tab-btn" data-home-tab="from-amarii">From Amarii</button>
+        </div>
+
+        <div id="home-feed" class="feed-list"></div>
+
+        <!-- Audio bar -->
+        <div class="now-playing-bar" id="now-playing-bar">
+          <div class="np-text">
+            <span class="np-label">Now Playing</span>
+            <span class="np-title" id="np-title">Nothing playing</span>
+          </div>
+          <button class="np-btn" id="np-open-song">▶</button>
+        </div>
+      </section>
+
+      <!-- VAULT PAGE -->
+      <section id="vault" class="screen vault-screen">
+        <h2 class="section-title">THE VAULT</h2>
+
+        <div class="vault-search">
+          <span class="search-icon">🔍</span>
+          <input
+            id="vault-search"
+            type="text"
+            class="input bare"
+            placeholder="Search"
+          />
+        </div>
+
+        <div id="vault-list" class="vault-list"></div>
+
+        <button id="vault-submit-btn" class="primary-btn wide">
+          Submit Your Snippet
+        </button>
+      </section>
+
+      <!-- SONG PAGE -->
+      <section id="song" class="screen song-screen">
+        <button class="back-btn" data-nav-target="home">← Back</button>
+
+        <div class="song-hero">
+          <div class="song-art"></div>
+          <div class="song-meta">
+            <h2 id="song-title"></h2>
+            <p id="song-tagline" class="song-tagline"></p>
+          </div>
+        </div>
+
+        <div class="song-player">
+          <div class="player-main">
+            <button id="song-play" class="player-btn">▶</button>
+            <div class="player-progress">
+              <div id="song-progress" class="player-progress-bar"></div>
+            </div>
+          </div>
+          <div class="player-lyrics-toggle">
+            <span>Lyrics</span>
+            <input type="range" min="0" max="1" step="1" id="lyrics-toggle" />
+          </div>
+        </div>
+
+        <div class="song-tabs">
+          <button class="tab-btn small active" data-song-tab="lyrics">Lyrics</button>
+          <button class="tab-btn small" data-song-tab="behind">Behind the Song</button>
+        </div>
+
+        <div id="song-lyrics" class="song-text-block"></div>
+        <div id="song-behind" class="song-text-block hidden"></div>
+
+        <button id="song-react-btn" class="secondary-btn">
+          React to this song
+        </button>
+
+        <div class="song-reactions">
+          <h3>Recent Reactions</h3>
+          <div id="song-reaction-list" class="feed-list small"></div>
+        </div>
+      </section>
+
+      <!-- REACT / CREATE PAGE -->
+      <section id="create" class="screen create-screen">
+        <h2 class="section-title">Reaction Mode</h2>
+
+        <!-- RECORD CARD (camera + mic) -->
+        <div class="record-card">
+          <div class="record-block">
+            <button id="record-btn" class="record-btn">●</button>
+            <div class="record-labels">
+              <span id="record-status">Ready to record</span>
+              <span class="record-hint">
+                Tap to record video + audio reaction. Recording stays on your device.
+              </span>
+            </div>
+          </div>
+
+          <div id="record-preview" class="record-preview hint">
+            No recording yet.
+          </div>
+        </div>
+
+        <label class="label">Track</label>
+        <select id="create-track" class="input"></select>
+
+        <label class="label">Mode</label>
+        <div class="chip-row">
+          <span class="chip active" data-mode="auto">AUTO</span>
+          <span class="chip" data-mode="freestyle">FREESTYLE</span>
+        </div>
+
+        <label class="label">Add Flashback Text</label>
+        <textarea
+          id="create-text"
+          class="input"
+          rows="3"
+          placeholder="What did this moment make you remember?"
+        ></textarea>
+
+        <div class="countdown-row">
+          <div class="countdown-bubble">3s</div>
+          <span class="countdown-hint">Countdown before recording starts.</span>
+        </div>
+
+        <button id="create-save" class="primary-btn">
+          Save Reaction
+        </button>
+
+        <!-- My Reactions on this page -->
+        <div class="create-recent">
+          <h3>My recent reactions</h3>
+          <div id="create-reaction-list" class="feed-list small"></div>
+        </div>
+      </section>
+
+      <!-- PROFILE PAGE -->
+      <section id="profile" class="screen profile-screen">
+        <div class="profile-header">
+          <div class="avatar" id="profile-avatar"></div>
+          <div>
+            <h2 id="profile-name"></h2>
+            <p class="handle" id="profile-handle"></p>
+          </div>
+        </div>
+
+        <p class="profile-bio" id="profile-bio"></p>
+
+        <div class="profile-block">
+          <h3>Top Songs</h3>
+          <ul id="profile-top-songs"></ul>
+        </div>
+
+        <div class="profile-block">
+          <button class="primary-btn" id="join-vault-btn">Join The Vault</button>
+          <button class="secondary-btn" id="merch-btn">Merch</button>
+        </div>
+      </section>
+
+      <!-- SETTINGS PAGE -->
+      <section id="settings" class="screen settings-screen">
+        <h2 class="section-title">Settings</h2>
+
+        <div class="settings-block">
+          <h3>User Dashboard</h3>
+          <div class="settings-row">
+            <span>Notifications</span>
+            <input type="checkbox" id="setting-notifications" />
+          </div>
+          <div class="settings-row">
+            <span>Favorite Songs</span>
+            <span id="settings-favorites-count">0</span>
+          </div>
+          <div class="settings-row">
+            <span>Saved Reactions</span>
+            <span id="settings-reactions-count">0</span>
+          </div>
+        </div>
+
+        <div class="settings-block">
+          <h3>Profile</h3>
+          <label class="label" for="setting-name">Display name</label>
+          <input id="setting-name" class="input" type="text" />
+
+          <label class="label" for="setting-handle">Handle</label>
+          <input id="setting-handle" class="input" type="text" placeholder="@yourhandle" />
+
+          <label class="label" for="setting-bio">Bio</label>
+          <textarea id="setting-bio" class="input" rows="3"></textarea>
+
+          <label class="label" for="setting-avatar">Profile photo</label>
+          <label class="file-pill">
+            <span class="file-pill-label">Upload photo</span>
+            <input
+              id="setting-avatar"
+              type="file"
+              accept="image/*"
+              class="file-input"
+            />
+          </label>
+        </div>
+
+        <div class="settings-block">
+          <h3>Suggest a feature</h3>
+          <textarea
+            id="setting-suggestion"
+            class="input"
+            rows="3"
+            placeholder="What would make Looped better for you?"
+          ></textarea>
+          <button id="setting-send-suggestion" class="secondary-btn">
+            Submit Suggestion
+          </button>
+          <p id="setting-suggestion-status" class="hint"></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-nav-target="home">Home</button>
+      <button class="nav-btn" data-nav-target="vault">Vault</button>
+      <button class="nav-btn" data-nav-target="create">React</button>
+      <button class="nav-btn" data-nav-target="profile">Profile</button>
+      <button class="nav-btn" data-nav-target="settings">Settings</button>
+    </nav>
+  </div>
+
+  <!-- GLOBAL AUDIO ELEMENT -->
+  <audio id="audio-player"></audio>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .catch((err) => console.log("SW registration failed:", err));
+      });
+    }
+  </script>
+</body>
+</html>
